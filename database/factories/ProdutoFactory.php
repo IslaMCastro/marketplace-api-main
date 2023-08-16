@@ -17,6 +17,12 @@ class ProdutoFactory extends Factory
     public function definition(): array
     {
         return [
+            'nome'=>"".$this->faker->word." ".$this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'descricao' => $this->faker->sentence(),
+            'preco'=> $this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'estoque'=> $this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'tipo_id'=> function ()
+
             //
         ];
     }

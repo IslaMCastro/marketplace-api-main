@@ -274,7 +274,4 @@ class TipoTest extends TestCase
             ]);
     }
 
-
-
-
 }
