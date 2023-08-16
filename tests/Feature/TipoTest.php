@@ -17,7 +17,7 @@ class TipoTest extends TestCase
 
     public function testListarTodosTipos()
     {
-        //Criar 5 tipos
+         //Criar 5 tipos
         //Salvar Temporario
         Tipo::factory()->count(5)->create();
 
@@ -87,7 +87,7 @@ class TipoTest extends TestCase
     public function testPesquisaTipoSucesso()
     {
         // Criar um tipo
-        $tipo = Tipo::factory()->create(); //criar no factory
+        $tipo = Tipo::factory()->create();
 
         
         // Fazer pesquisa
@@ -127,11 +127,11 @@ class TipoTest extends TestCase
     public function testUpdateTipoSucesso()
     {
         // Crie um tipo fake
-        $tipo = Tipo::factory()->create(); //criar no factory
+        $tipo = Tipo::factory()->create();
 
         // Dados para update
         $newData = [
-            'data'=> 'Tipo Descrição'            
+            'descricao' => 'Tipo Descrição',            
         ];
         
         // Faça uma chamada PUT
@@ -167,6 +167,7 @@ class TipoTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['descricao']);
     }
+
 
     /**
      * Teste update de marca

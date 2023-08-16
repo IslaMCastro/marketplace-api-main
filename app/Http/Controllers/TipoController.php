@@ -13,13 +13,13 @@ class TipoController extends Controller
      */
     public function index()
     {
-        //Pegar a lista do banco
-        $tipos = Tipo::all();
+         //Pegar a lista do banco
+         $tipos = Tipo::all();
 
-        //Retornar lista em formato json
-        return response()->json(['data' => $tipos]);
-    }
-
+         //Retornar lista em formato json
+         return response()->json(['data' => $tipos]);
+     }
+     
     /**
      * Show the form for creating a new resource.
      */
@@ -88,7 +88,7 @@ class TipoController extends Controller
               return response()->json(['message' => 'Tipo não encontrado!'], 404);
           }  
           //sempre verificar se existe e se há classes dependentes, se sim, retornar erro.
-          //
+          
 
     
           // Delete the brand
