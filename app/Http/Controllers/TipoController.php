@@ -84,9 +84,12 @@ class TipoController extends Controller
           // Encontre um tipo pelo ID
           $tipo = Tipo::find($id);
 
-          if (!$tipo) { //semore verificar se o tipo existe
+          if (!$tipo) { 
               return response()->json(['message' => 'Tipo não encontrado!'], 404);
           }  
+          //sempre verificar se existe e se há classes dependentes, se sim, retornar erro.
+          //
+
     
           // Delete the brand
           $tipo->delete();
