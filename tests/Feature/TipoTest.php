@@ -22,6 +22,7 @@ class TipoTest extends TestCase
         Tipo::factory()->count(5)->create();
 
         // usar metodo GET para verificar o retorno
+        
         $response = $this->getJson('/api/tipos');
 
         //Testar ou verificar saida
