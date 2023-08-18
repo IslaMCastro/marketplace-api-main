@@ -38,7 +38,7 @@ class ProdutoController extends Controller
          $produto = Produto::create($request->all());
 
          // // Retorne o tipo e o code 201
-         return response()->json($produto, 201);
+         return response()->json($produto, 200);
         //
     }
 

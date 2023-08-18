@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\TipoController;
-use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

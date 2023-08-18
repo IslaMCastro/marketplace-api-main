@@ -22,11 +22,11 @@ class UpdateProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|min: 2|max: 30|unique:produto,nome',
-            'descricao'=> 'required|min: 2|max: 50',
-            'preco'=> 'required|min: 2|max: 50|integer',
-            'estoque'=> 'required|min: 2|max: 50',
-            'tipo_id'=> 'required|min: 2|max: 50',
+            'nome' => 'required|min: 2|unique:produtos,nome' . $this->route('produtos') . ',id|required',
+            'descricao'=> 'required|min:2',
+            'preco'=> 'decimal:2|required',
+            'estoque'=> 'integer|required',
+            'tipo_id'=> 'required|existis:tipos,id',
             //
         ];
     }

@@ -48,15 +48,15 @@ class TipoTest extends TestCase
         //Debug
         //dd($data);
 
-        // Fazer uma requisição POST
+        // Fazer uma requisição POST -  para salvar
         $response = $this->postJson('/api/tipos', $data);
 
         //dd($response);
 
         // Verifique se teve um retorno 201 - Criado com Sucesso
         // e se a estrutura do JSON Corresponde
-        $response->assertStatus(201)
-            ->assertJsonStructure(['id', 'descricao', 'created_at', 'updated_at']);
+        $response->assertStatus(201)// preciso desse retorno
+            ->assertJsonStructure(['id', 'descricao', 'created_at', 'updated_at']);// com essas informações
 
     }
 
@@ -76,8 +76,8 @@ class TipoTest extends TestCase
 
         // Verifique se teve um retorno 422 - Falha no salvamento
         // e se a estrutura do JSON Corresponde
-        $response->assertStatus(422)
-            ->assertJsonValidationErrors(['descricao']);
+        $response->assertStatus(422)// se quero falha é essa resposta qie eu quero
+            ->assertJsonValidationErrors(['descricao']); // validacao nesse campo
     }
 
      /**
@@ -94,7 +94,7 @@ class TipoTest extends TestCase
         // Fazer pesquisa
         $response = $this->getJson('/api/tipos/' . $tipo->id);   
         
-        // Verificar saida
+        // Verificar saida //no show(controller)
         $response->assertStatus(200)
             ->assertJson([
                 'id' => $tipo->id,
@@ -157,7 +157,7 @@ class TipoTest extends TestCase
         $tipo = Tipo::factory()->create();
 
         // Crie dados falhos
-        $invalidData = [
+        $invalidData = [ //data=dados (lembrando que para criar uma variavel usa o $ na frente)
             'descricao' => '', // Invalido: Descricao vazio
         ];
 
@@ -166,7 +166,7 @@ class TipoTest extends TestCase
 
         // Verificar se teve um erro 422
         $response->assertStatus(422)
-            ->assertJsonValidationErrors(['descricao']);
+            ->assertJsonValidationErrors(['descricao']);// erro nessa informação
     }
 
 
@@ -194,21 +194,32 @@ class TipoTest extends TestCase
      */
     public function testUpdateTipoMesmosDados()
     {
-        // Crie um tipo fake
+
+        // Criar um tipo usando o factory
         $tipo = Tipo::factory()->create();
 
-        // Data para update
-        $sameData = [
-            'descricao' => $tipo->tipo,            
+        //Criar o objeto
+        $data = [
+            'nome' => "" . $this->faker->word . " " .
+                $this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'descricao' => $this->faker->sentence(),
+            'preco' => $this->faker->randomFloat(2, 10, 1000),
+            'estoque' => $this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'tipo_id' => $tipo->id
         ];
 
-        // Faça uma chamada PUT
-        $response = $this->putJson('/api/tipos/' . $tipo->id, $sameData);
 
-        // Verifique a resposta
-        $response->assertStatus(422)
-            ->assertJsonValidationErrors(['descricao']);
+        // Fazer uma requisição POST
+        $response = $this->postJson('/api/produtos', $data);
+
+        //dd($response);
+
+        // Verifique se teve um retorno 201 - Criado com Sucesso
+        // e se a estrutura do JSON Corresponde
+        $response->assertStatus(201)
+            ->assertJsonStructure(['id', 'nome', 'descricao', 'preco', 'estoque', 'tipo_id', 'created_at', 'updated_at']);
     }
+
 
     /**
      * Teste upgrade com nome duplicado
