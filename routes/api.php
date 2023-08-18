@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TipoController;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,13 @@ Route::middleware('api')->prefix('tipos')->group(function () {
     Route::get('/{tipo}', [TipoController::class, 'show']);
     Route::put('/{tipo}', [TipoController::class, 'update']);
     Route::delete('/{tipo}', [TipoController::class, 'destroy']);
+});
+
+//Rotas Produtos
+Route::middleware('api')->prefix('produtos')->group(function () {
+    Route::get('/', [ProdutoController::class, 'index']);
+    Route::post('/', [ProdutoController::class, 'store']);
+    Route::get('/{produtos}', [ProdutoController::class, 'show']);
+    Route::put('/{produtos}', [ProdutoController::class, 'update']);
+    Route::delete('/{produtos}', [ProdutoController::class, 'destroy']);
 });

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("preco");       
             $table->integer("estoque"); 
             $table->unsignedBigInteger('tipo_id');
-            $table->foreign('tipo_id')->references('id')->on('tipo');
+            $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->timestamps();
         });
     }

@@ -24,10 +24,10 @@ class ProdutoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-   // public function create()
-   // {
+    public function create()
+    {
         //
-   // }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -95,7 +95,7 @@ class ProdutoController extends Controller
          $produto = Produto::find($id);
 
          if (!$produto) { 
-             return response()->json(['message' => 'Tipo não encontrado!'], 404);
+             return response()->json(['message' => 'Produto não encontrado!'], 404);
          }  
          //sempre verificar se existe e se há classes dependentes, se sim, retornar erro.
          
@@ -104,7 +104,7 @@ class ProdutoController extends Controller
          // Delete the brand
          $produto->delete();
  
-         return response()->json(['message' => 'Tipo deletado com sucesso!'], 200);
+         return response()->json(['message' => 'Produto deletado com sucesso!'], 200);
     }
        
     }
