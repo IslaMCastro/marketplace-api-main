@@ -14,14 +14,10 @@ class AvaliacaoController extends Controller
     public function index()
     {
         //
-    }
+        $avaliacoes = Avaliacao::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        //Retornar lista em formato json
+        return response()->json(['data' => $avaliacoes]);
     }
 
     /**
@@ -29,38 +25,30 @@ class AvaliacaoController extends Controller
      */
     public function store(StoreAvaliacaoRequest $request)
     {
-        //
-    }
+        // Crie um novo Tipo
+        $avaliacao = Avaliacao::create($request->all());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Avaliacao $avaliacao)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Avaliacao $avaliacao)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAvaliacaoRequest $request, Avaliacao $avaliacao)
-    {
-        //
+        // Retorne o codigo 201
+        return response()->json($avaliacao, 201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Avaliacao $avaliacao)
+    public function destroy($id)
     {
-        //
+        // Encontre um tipo pelo ID
+        $avaliacao = Avaliacao::find($id);
+
+        if (!$avaliacao) {
+            return response()->json(['message' => 'Avaliação não encontrada!'], 404);
+        }
+
+        //Se tiver dependentes deve retornar erro
+
+        // Delete the brand
+        $avaliacao->delete();
+
+        return response()->json(['message' => 'Avaliação deletada com sucesso!'], 200);
     }
 }

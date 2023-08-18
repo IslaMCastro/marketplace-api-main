@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Produto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,11 @@ class AvaliacaoFactory extends Factory
     {
         return [
             //
-        ];
+            'descricao' => $this->faker->sentence(),
+            'nota' => $this->faker->randomFloat(2, 0, 10),
+            'produto_id' => function () {
+                return Produto::factory()->create()->id;
+            }
+          ];
     }
 }

@@ -22,6 +22,9 @@ class UpdateAvaliacaoRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'descricao' => 'min:2|required',
+            'nota' => 'min:0|max:10|numeric|required',
+            'produto_id' => 'required|exists:produtos,id',
             //
         ];
     }
