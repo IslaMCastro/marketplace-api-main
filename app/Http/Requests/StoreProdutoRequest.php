@@ -22,7 +22,7 @@ class StoreProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|min: 2|unique:produtos,nome' . $this->route('produtos') . ',id|required',
+            'nome' => 'required|min: 2|unique:produtos,nome,',
             'descricao'=> 'required|min:2',
             'preco'=> 'decimal:2|required',
             'estoque'=> 'integer|required',

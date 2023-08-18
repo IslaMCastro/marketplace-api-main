@@ -38,14 +38,14 @@ class ProdutoController extends Controller
          $produto = Produto::create($request->all());
 
          // // Retorne o tipo e o code 201
-         return response()->json($produto, 200);
+         return response()->json($produto, 201);
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Produto $id)
+    public function show($id)
     {
         $produto = Produto::find($id);
 
@@ -54,7 +54,6 @@ class ProdutoController extends Controller
         }
 
         return response()->json($produto);
-        //
     }
 
     /**
@@ -68,23 +67,22 @@ class ProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProdutoRequest $request, Produto $id)
+    public function update(UpdateProdutoRequest $request, $id)
     {
-          // Procure o tipo pela id
-          $produto = Produto::find($id);
+        // Procure o tipo pela id
+        $produto = Produto::find($id);
 
-          if (!$produto) {
-              return response()->json(['message' => 'Produto não encontrado'], 404);
-          }
-  
-          // Faça o update do tipo
-          $produto->update($request->all());
-  
-          // Retorne o tipo
-          return response()->json($produto);
-          //
-        //
+        if (!$produto) {
+            return response()->json(['message' => 'Produto não encontrado'], 404);
+        }
+
+        // Faça o update do tipo
+        $produto->update($request->all());
+
+        // Retorne o tipo
+        return response()->json($produto);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -98,9 +96,7 @@ class ProdutoController extends Controller
              return response()->json(['message' => 'Produto não encontrado!'], 404);
          }  
          //sempre verificar se existe e se há classes dependentes, se sim, retornar erro.
-         
-
-   
+            
          // Delete the brand
          $produto->delete();
  

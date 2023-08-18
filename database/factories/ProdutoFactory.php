@@ -18,15 +18,17 @@ class ProdutoFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome'=>"".$this->faker->word." ".$this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            //
+            'nome' => "" . $this->faker->word . " " .
+                $this->faker->numberBetween($int1 = 0, $int2 = 99999),
             'descricao' => $this->faker->sentence(),
-            'preco'=> $this->faker->randomFloat(2,10,1000),
-            'estoque'=> $this->faker->numberBetween($int1 = 0, $int2 = 99999),            
-            'tipo_id'=> function () {
+            'preco' => $this->faker->randomFloat(2, 10, 1000),
+            'estoque' => $this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'tipo_id' => function () {
                 return Tipo::factory()->create()->id;
             }
 
-            //
+
         ];
     }
 }

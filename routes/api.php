@@ -34,7 +34,7 @@ Route::middleware('api')->prefix('tipos')->group(function () {
 Route::middleware('api')->prefix('produtos')->group(function () {
     Route::get('/', [ProdutoController::class, 'index']);
     Route::post('/', [ProdutoController::class, 'store']);
-    Route::get('/{produtos}', [ProdutoController::class, 'show']);
-    Route::put('/{produtos}', [ProdutoController::class, 'update']);
-    Route::delete('/{produtos}', [ProdutoController::class, 'destroy']);
+    Route::get('/{produto}', [ProdutoController::class, 'show']);
+    Route::put('/{produto}', [ProdutoController::class, 'update']);
+    Route::delete('/{produto}', [ProdutoController::class, 'destroy']);
 });
