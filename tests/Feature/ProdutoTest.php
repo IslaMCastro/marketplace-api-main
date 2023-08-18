@@ -8,7 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-use function Laravel\Prompts\error;
 
 class ProdutoTest extends TestCase
 {
@@ -265,21 +264,33 @@ class ProdutoTest extends TestCase
             ->assertJsonValidationErrors(['nome']);
     }
 
-    public function testDeleteProdutos()
+    public function testDeleteProduto()
     {
-           // Criar produto fake
-           $produto = Produto::factory()->create();
+        // Criar produto fake
+        $produto = Produto::factory()->create();
 
-           // enviar requisição para Delete
-           $response = $this->deleteJson('/api/produtos/' . $produto->id);
-   
-           // Verifica o Delete
-           $response->assertStatus(200)
-               ->assertJson([
-                   'message' => 'Produto deletado com sucesso!'
-               ]);
-   
-           //Verifique se foi deletado do banco
-           $this->assertDatabaseMissing('produtos', ['id' => $produto->id]);
-       }
+        // enviar requisição para Delete
+        $response = $this->deleteJson('/api/produtos/' . $produto->id);
+
+        // Verifica o Delete
+        $response->assertStatus(200)
+            ->assertJson([
+                'message' => 'Produto deletado com sucesso!'
+            ]);
+
+        //Verifique se foi deletado do banco
+        $this->assertDatabaseMissing('produtos', ['id' => $produto->id]);
+    }
+
+    public function testDeleteProdutoNaoExistente()
+    {
+        // enviar requisição para Delete
+        $response = $this->deleteJson('/api/produtos/999');
+
+        // Verifique a resposta
+        $response->assertStatus(404)
+            ->assertJson([
+                'message' => 'Produto não encontrado!'
+            ]);
+    }
 }

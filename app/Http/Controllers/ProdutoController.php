@@ -87,7 +87,7 @@ class ProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produto $id)
+    public function destroy($id)
     {
          // Encontre um tipo pelo ID
          $produto = Produto::find($id);
