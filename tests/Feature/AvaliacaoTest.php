@@ -73,7 +73,7 @@ class AvaliacaoTest extends TestCase
         $data = [
             'descricao' => "a",
             'nota' => 11,
-            'produto_id' => 0
+            'produto_id' => " "
         ];
 
         //Debug

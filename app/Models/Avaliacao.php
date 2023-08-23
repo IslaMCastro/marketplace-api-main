@@ -9,6 +9,6 @@ class Avaliacao extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['descricao','nota', 'produto_id',];
+    protected $fillable = ['descricao','nota', 'produto_id'];
 
 }
