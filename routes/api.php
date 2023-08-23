@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\TipoController;
 use Illuminate\Http\Request;

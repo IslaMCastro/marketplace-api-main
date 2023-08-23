@@ -45,7 +45,7 @@ class MarketplaceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Marketplace $id)
+    public function show($id)
     {
         $marketplace = Marketplace::find($id);
 
@@ -89,7 +89,7 @@ class MarketplaceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Marketplace $id)
+    public function destroy( $id)
     {
         $marketplace = Marketplace::find($id);
 

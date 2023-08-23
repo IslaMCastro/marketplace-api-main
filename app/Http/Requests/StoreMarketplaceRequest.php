@@ -24,8 +24,8 @@ class StoreMarketplaceRequest extends FormRequest
         return [
             'nome' => 'required|min: 2|unique:maketplaces,nome,',
             'descricao'=> 'required|min:2',
-            'min:2|unique:marketplaces,url|required',
-            'produto_id' => 'required|exists:produtos,id'
+            'url'=> 'min:2|unique:marketplaces,url|required',
+            
             //
         ];
     }

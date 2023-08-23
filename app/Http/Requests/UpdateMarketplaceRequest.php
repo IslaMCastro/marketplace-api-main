@@ -22,11 +22,12 @@ class UpdateMarketplaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|min: 2|unique:marketplaces,nome,' . $this->route('marketplace') . ',id|required',
+            'nome' => 'required|min: 2|unique:marketplaces,nome,' 
+            . $this->route('marketplace') . ',id|required',
             'descricao'=> 'required|min:2',
-            'url' => 'min:2|unique:marketplaces,url,' . $this->route('marketplace') . ',id|required',
-            'produto_id' => 'required|exists:produtos,id'
-            //
+            'url' => 'min:2|unique:marketplaces,url,' 
+            . $this->route('marketplace') . ',id|required',
+           
         ];
     }
 }
