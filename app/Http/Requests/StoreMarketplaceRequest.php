@@ -11,7 +11,7 @@ class StoreMarketplaceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,6 +22,10 @@ class StoreMarketplaceRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'nome' => 'required|min: 2|unique:maketplaces,nome,',
+            'descricao'=> 'required|min:2',
+            'min:2|unique:marketplaces,url|required',
+            'produto_id' => 'required|exists:produtos,id'
             //
         ];
     }

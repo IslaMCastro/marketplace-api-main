@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('marketplaces', function (Blueprint $table) {
             $table->id();
+            $table->string('nome')->unique();
+            $table->string('descricao');
+            $table->string('url')->unique();
             $table->timestamps();
         });
+       
     }
 
     /**
