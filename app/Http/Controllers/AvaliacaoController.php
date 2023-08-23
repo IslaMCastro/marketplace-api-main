@@ -14,10 +14,10 @@ class AvaliacaoController extends Controller
     public function index()
     {
         //
-        $avaliacoes = Avaliacao::all();
+        $avaliacao = Avaliacao::all();
 
         //Retornar lista em formato json
-        return response()->json(['data' => $avaliacoes]);
+        return response()->json(['data' => $avaliacao]);
     }
 
     /**
