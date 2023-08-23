@@ -22,7 +22,7 @@ class StoreMarketplaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|min: 2|unique:maketplaces,nome,',
+            'nome' => 'required|min: 2|unique:marketplaces,nome,',
             'descricao'=> 'required|min:2',
             'url'=> 'min:2|unique:marketplaces,url|required',
             

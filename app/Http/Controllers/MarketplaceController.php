@@ -89,19 +89,23 @@ class MarketplaceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
-        $marketplace = Marketplace::find($id);
 
+        $marketplace = Marketplace::find($id);
+        
         if (!$marketplace) { 
             return response()->json(['message' => 'marketplace não encontrado!'], 404);
         }  
+    
         //sempre verificar se existe e se há classes dependentes, se sim, retornar erro.
            
-        // Delete the brand
+        // // Delete the brand
+        // 
+        
         $marketplace->delete();
 
         return response()->json(['message' => 'marketplace deletado com sucesso!'], 200);
-        //
+        // //
     }
 }

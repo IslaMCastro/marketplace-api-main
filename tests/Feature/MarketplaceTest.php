@@ -106,7 +106,7 @@ class MarketplaceTest extends TestCase
         $newData = [
             'nome' => 'New name',
             'descricao' => 'New name',
-            'url' => '',
+            'url' => 'new url',
            
 
         ];
@@ -120,7 +120,7 @@ class MarketplaceTest extends TestCase
                 'id' => $marketplace->id,
                 'nome' => 'New name',
                 'descricao' => 'New name',
-                'url' => '',
+                'url' => 'new url',
                
             ]);
     }
@@ -157,7 +157,7 @@ class MarketplaceTest extends TestCase
         $newData = [ 
             'nome' => 'New name',
             'descricao' => 'New name',
-            'url' => '',
+            'url' => 'new url',
            
 
         ];
@@ -231,11 +231,11 @@ class MarketplaceTest extends TestCase
         // Verifica o Delete
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Marketplace deletado com sucesso!'
+                'message' => 'marketplace deletado com sucesso!'
             ]);
 
         //Verifique se foi deletado do banco
-        $this->assertDatabaseMissing('marketplace', ['id' => $marketplace->id]);
+        $this->assertDatabaseMissing('marketplaces', ['id' => $marketplace->id]);
     }
 
     public function testDeleteMarketplaceNaoExistente()
