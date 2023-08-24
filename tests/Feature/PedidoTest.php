@@ -35,7 +35,7 @@ class PedidoTest extends TestCase
             ]);
     }
 
-    public function testCriarPedidosSucesso(){
+    public function testCriarPedidoSucesso(){
       
           // Criar um pedido usando o factory
           $pedido = Pedido::factory()->create();
@@ -68,22 +68,23 @@ class PedidoTest extends TestCase
      *
      * @return void
      */
-    public function testCriacaoPedidosFalha()
+    public function testCriacaoPedidoFalha()
     
     {
         $data = [
-            'numero' => 0123,
-            'data'=> '2013-08-23',
-            'status'=> 001,
-            'total'=> 12.444,
+            'numero' => "a",
+            'data' => "",
+            'status' => "",
+            'total' => "",
         ];
-         // Fazer uma requisição POST
-        $response = $this->postJson('/api/pedidos', $data);
+        // Fazer uma requisição POST
+        $response = $this->postJson('/api/pedidos/', $data);
 
         // Verifique se teve um retorno 422 - Falha no salvamento
         // e se a estrutura do JSON Corresponde
-        $response->assertStatus(422)// se quero falha é essa resposta qie eu quero
-            ->assertJsonValidationErrors(['descricao']); // validacao nesse campo
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['numero', 'data', 'status', 'total']);
+    
     }
 
      /**
@@ -91,29 +92,30 @@ class PedidoTest extends TestCase
      *
      * @return void
      */
-    public function testPesquisaPedidosSucesso()
+    public function testPesquisaPedidoSucesso()
     {
-        // Criar um pedido
-        $pedido = Pedido::factory()->create();
+          // Criar um Pedido
+          $pedido = Pedido::factory()->create();
 
-        // Fazer pesquisa
-        $response = $this->getJson('/api/pedidos/' . $pedido->id);
 
-        // Verificar saida
-        $response->assertStatus(200)
-            ->assertJson([
-                'id' => $pedido->id,
-                'descricao' => $pedido->descricao
-              
-            ]);
-    }
-
-    /**
-     * Teste de pesquisa de registro com falha
+          // Fazer pesquisa
+          $response = $this->getJson('/api/pedidos/' . $pedido->id);
+  
+          // Verificar saida
+          $response->assertStatus(200)
+              ->assertJson([
+                  'id' => $pedido->id,
+                  'numero' => $pedido->numero,
+                  'data' => $pedido->data,
+                  'status' => $pedido->status,
+                  'total' => $pedido->total,
+              ]);
+      }
+     /* Teste de pesquisa de registro com falha
      *
      * @return void
      */
-    public function testPesquisaPedidosComFalha()
+    public function testPesquisaPedidoComFalha()
     {
         // Fazer pesquisa com um id inexistente
         $response = $this->getJson('/api/pedidos/999'); // o 999 nao pode existir
@@ -153,14 +155,14 @@ class PedidoTest extends TestCase
     }
     
     
-    public function testUpdatePedidosDataInvalida()
+    public function testUpdatePedidoDataInvalida()
     {
         // Crie um pedido falso
         $pedido = Pedido::factory()->create();
 
         // Crie dados falhos
         $invalidData = [ //data=dados (lembrando que para criar uma variavel usa o $ na frente)
-            'numero' => '',
+            'numero' => 'a',
             'data'=> '',
             'status'=> '',
             'total'=> '',
@@ -171,7 +173,7 @@ class PedidoTest extends TestCase
 
         // Verificar se teve um erro 422
         $response->assertStatus(422)
-            ->assertJsonValidationErrors(['descricao']);// erro nessa informação
+            ->assertJsonValidationErrors(['numero', 'data', 'status', 'total']);// erro nessa informação
     }
 
     public function testUpdatePedidoNaoExistente()
@@ -230,19 +232,19 @@ class PedidoTest extends TestCase
     public function testUpdatePedidoNumeroDuplicado()
     {
         // Crie um pedido fake
-        $pedido = Pedido::factory()->create();
-        $atualizar = Pedido::factory()->create();
+        $pedidoExistente = Pedido::factory()->create();
+        $pedidoUpdate = Pedido::factory()->create();
 
         // Data para update
         $sameData = [
-            'numero' => $pedido->numero,
-            'data'=> $pedido->data,
-            'status'=> $pedido->status,
-            'total'=> $pedido->total,
+            'numero' => $pedidoExistente->numero,
+            'data'=> $pedidoExistente->data,
+            'status'=> $pedidoExistente->status,
+            'total'=> $pedidoExistente->total,
         ];
 
         // Faça uma chamada PUT
-        $response = $this->putJson('/api/pedidos/' . $atualizar->id, $sameData);
+        $response = $this->putJson('/api/pedidos/' . $pedidoUpdate->id, $sameData);
 
         // Verifique a resposta
         $response->assertStatus(422)

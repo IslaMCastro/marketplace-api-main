@@ -17,10 +17,10 @@ class PedidoFactory extends Factory
     public function definition(): array
     {
         return [
-            'numero' => $this->faker->numberBetween($int1 = 0, $int2 = 99999),
-            'data' => $this->faker->date(),
-            'status' => $this->faker->numberBetween($int1 = 0, $int2 = 99999),
-            'total' => $this->faker->randomFloat(2, 10, 1000),
+            'numero' => $this->faker->numberBetween($min = 1, $max = 9000),
+            'data' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'status' => $this->faker->numberBetween($min = 1, $max = 5),
+            'total' => $this->faker->numberBetween($min = 1, $max = 9000),
             //
         ];
     }
