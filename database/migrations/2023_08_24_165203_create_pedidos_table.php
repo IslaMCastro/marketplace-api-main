@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->integer("numero")->unique();
-            $table->dateTime("data");
-            $table->integer("status");       
-            $table->double("total"); 
+            $table->integer('numero');
+            $table->date('data');
+            $table->integer('status');
+            $table->double('total');
             $table->timestamps();
         });
     }

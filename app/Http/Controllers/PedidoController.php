@@ -13,23 +13,13 @@ class PedidoController extends Controller
      */
     public function index()
     {
-         //Pegar a lista do banco
-            $pedido = Pedido::all();
-    
-            //Retornar lista em formato json
-            return response()->json(['data' => $pedido]);
-            //
-        }
-        //
-    
+        //Pegar a lista do banco
+        $pedidos = Pedido::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-   // public function create()
-   // {
-        //
-   // }
+        //Retornar lista em formato json
+        return response()->json(['data' => $pedidos]);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -37,42 +27,33 @@ class PedidoController extends Controller
     public function store(StorePedidoRequest $request)
     {
         // Crie um novo Tipo
-        $pedido= Pedido::create($request->all());
+        $pedido = Pedido::create($request->all());
 
-        // // Retorne o tipo e o code 201
+        // Retorne o codigo 201
         return response()->json($pedido, 201);
-       //
-        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show ($id)
+    public function show($id)
     {
-        $pedido = Pedido::find($id);
+              // procure Pedido por id
+              $pedido = Pedido::find($id);
 
-        if (!$pedido) {
-            return response()->json(['message' => 'Pedido não encontrado'], 404);
-        }
-
-        return response()->json($pedido);
-        //
+              if (!$pedido) {
+                  return response()->json(['message' => 'Pedido não encontrado'], 404);
+              }
+      
+              return response()->json($pedido);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-   // public function edit(Pedido $pedido)
-   // {
-        //
-   // }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdatePedidoRequest $request, $id)
     {
+        // Procure o Pedido pela id
         $pedido = Pedido::find($id);
 
         if (!$pedido) {
@@ -84,7 +65,6 @@ class PedidoController extends Controller
 
         // Retorne o tipo
         return response()->json($pedido);
-        //
     }
 
     /**
@@ -92,17 +72,18 @@ class PedidoController extends Controller
      */
     public function destroy($id)
     {
-        $pedido = Pedido::find($id);
+         // Encontre um Pedido pelo ID
+         $pedido = Pedido::find($id);
 
-         if (!$pedido) { 
+         if (!$pedido) {
              return response()->json(['message' => 'Pedido não encontrado!'], 404);
          }  
-         //sempre verificar se existe e se há classes dependentes, se sim, retornar erro.
-            
+
+         //Se tiver dependentes deve retornar erro
+   
          // Delete the brand
          $pedido->delete();
  
          return response()->json(['message' => 'Pedido deletado com sucesso!'], 200);
-        //
     }
 }

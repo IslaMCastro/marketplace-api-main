@@ -22,11 +22,10 @@ class StorePedidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'numero' => 'integer|required|unique:pedidos,numero',
-            'data'=> 'date|required',
-            'status'=> 'integer|required',
-            'total'=> 'numeric|required',
-            
+            'numero' => 'required|integer|unique:pedidos,numero',
+            'data'=> 'required|date',
+            'status'=> 'required|integer',
+            'total'=> 'required|numeric',
             //
         ];
     }

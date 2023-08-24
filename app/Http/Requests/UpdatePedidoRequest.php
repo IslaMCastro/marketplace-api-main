@@ -22,10 +22,10 @@ class UpdatePedidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'numero' => 'integer|unique:pedidos,numero,' . $$this->route('pedido') . ',id|required',
-            'data'=> 'date|required',
-            'status'=> 'integer|required',
-            'total'=> 'numeric|required',
+            'numero' => 'integer|unique:pedidos,numero,' . $this->route('pedido') . ',id|required',
+            'data' => 'required|date',
+            'status' => 'required|integer',
+            'total' => 'required|numeric',
             //
         ];
     }
