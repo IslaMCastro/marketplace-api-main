@@ -13,6 +13,10 @@ class DetalhePedidoController extends Controller
      */
     public function index()
     {
+        $detalhe = DetalhePedido::all();
+
+        //Retornar lista em formato json
+        return response()->json(['data' => $detalhe]);
         //
     }
 
@@ -29,14 +33,25 @@ class DetalhePedidoController extends Controller
      */
     public function store(StoreDetalhePedidoRequest $request)
     {
+        $detalhe = DetalhePedido::create($request->all());
+
+        // Retorne o codigo 201
+        return response()->json($detalhe, 201);
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(DetalhePedido $detalhePedido)
+    public function show($id)
     {
+        $detalhe = DetalhePedido::find($id);
+
+        if (!$detalhe) {
+            return response()->json(['message' => 'Detalhe Pedido não encontrado'], 404);
+        }
+
+        return response()->json($detalhe);
         //
     }
 
@@ -51,16 +66,39 @@ class DetalhePedidoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDetalhePedidoRequest $request, DetalhePedido $detalhePedido)
+    public function update(UpdateDetalhePedidoRequest $request, $id)
     {
+        $detalhe = DetalhePedido::find($id);
+
+        if (!$detalhe) {
+            return response()->json(['message' => 'Detalhe Pedido não encontrado'], 404);
+        }
+
+        // Faça o update do tipo
+        $detalhe->update($request->all());
+
+        // Retorne o tipo
+        return response()->json($detalhe);
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DetalhePedido $detalhePedido)
+    public function destroy(DetalhePedido $id)
     {
+        $detalhe = DetalhePedido::find($id);
+
+        if (!$detalhe) {
+            return response()->json(['message' => 'Detalhe Pedido não encontrada!'], 404);
+        }
+
+        //Se tiver dependentes deve retornar erro
+
+        // Delete the brand
+        $detalhe->delete();
+
+        return response()->json(['message' => 'Detalhe Pedido deletada com sucesso!'], 200);
         //
     }
 }
