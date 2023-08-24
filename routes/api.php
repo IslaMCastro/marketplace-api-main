@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\MarketplaceController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\TipoController;
 use Illuminate\Http\Request;
@@ -55,4 +56,12 @@ Route::middleware('api')->prefix('marketplaces')->group(function () {
     Route::get('/{marketplace}', [MarketplaceController::class, 'show']);
     Route::put('/{marketplace}', [MarketplaceController::class, 'update']);
     Route::delete('/{marketplace}', [MarketplaceController::class, 'destroy']);
+});
+
+Route::middleware('api')->prefix('pedidos')->group(function () {
+    Route::get('/', [PedidoController::class, 'index']);
+    Route::post('/', [PedidoController::class, 'store']);
+    Route::get('/{pedido}', [PedidoController::class, 'show']);
+    Route::put('/{pedido}', [PedidoController::class, 'update']);
+    Route::delete('/{pedido}', [PedidoController::class, 'destroy']);
 });

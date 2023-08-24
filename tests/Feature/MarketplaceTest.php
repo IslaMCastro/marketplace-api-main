@@ -94,10 +94,12 @@ class MarketplaceTest extends TestCase
                 
                 
             ]);
-     }   
+     }
+     
+  
    
    
-    public function testUpdateMarketpalceSucesso()
+    public function testUpdateMarketplaceSucesso()
     {
         // Crie um marketplace fake
         $marketplace = Marketplace::factory()->create();
