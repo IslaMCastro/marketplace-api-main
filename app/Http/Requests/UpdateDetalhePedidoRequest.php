@@ -11,7 +11,7 @@ class UpdateDetalhePedidoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,8 @@ class UpdateDetalhePedidoRequest extends FormRequest
             'pedido_id' => 'required|exists:pedidos,id',
             'produto_id' => 'required|exists:produtos,id',
             'quantidade' => 'required|integer|min:0',
-            'preco' => 'required|numeric|min:0',
-            'total' => 'required|numeric|min:0',
+            'preco' => 'required|numeric|min:2',
+            'total' => 'required|numeric|min:2',
             //
         ];
     }

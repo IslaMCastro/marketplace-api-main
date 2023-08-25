@@ -23,7 +23,7 @@ class UpdateMarketplaceRequest extends FormRequest
     {
         return [
             'nome' => 'required|min: 2|unique:marketplaces,nome,' 
-            . $this->route('marketplace') . ',id|required',
+            . $this->route('marketplace') . ',id|required', //apenas quando é único e/ou chave composta 
             'descricao'=> 'required|min:2',
             'url' => 'min:2|unique:marketplaces,url,' 
             . $this->route('marketplace') . ',id|required',

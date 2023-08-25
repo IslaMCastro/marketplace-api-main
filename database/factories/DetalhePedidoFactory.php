@@ -19,18 +19,15 @@ class DetalhePedidoFactory extends Factory
     public function definition(): array
     {
         return [
-            'pedido_id'=> function(){
+            'pedido_id'=> function () {
                 return Pedido::factory()->create()->id;
             },
-            'produto_id'=> function(){
+            'produto_id'=> function () {
                 return Produto::factory()->create()->id;
             },
-            'quantidade'=> $this->faker->numberBetween($int1 = 0, $int2 = 90000),
-            'preco'=> $this->faker->numberBetween($int1 = 0, $int2 = 90000),
-            'total'=> $this->faker->numberBetween($int1 = 0, $int2 = 90000),
-
-
-            //
+            'quantidade' =>$this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'preco' => $this->faker->numberBetween($int1 = 0, $int2 = 99999),
+            'total' => $this->faker->numberBetween($int1 = 0, $int2 = 99999),
         ];
     }
 }

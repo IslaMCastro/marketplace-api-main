@@ -13,10 +13,10 @@ class DetalhePedidoController extends Controller
      */
     public function index()
     {
-        $detalhe = DetalhePedido::all();
+        $detalhePedido = DetalhePedido::all();
 
         //Retornar lista em formato json
-        return response()->json(['data' => $detalhe]);
+        return response()->json(['data' => $detalhePedido]);
         //
     }
 
@@ -33,10 +33,10 @@ class DetalhePedidoController extends Controller
      */
     public function store(StoreDetalhePedidoRequest $request)
     {
-        $detalhe = DetalhePedido::create($request->all());
+        $detalhePedido = DetalhePedido::create($request->all());
 
         // Retorne o codigo 201
-        return response()->json($detalhe, 201);
+        return response()->json($detalhePedido, 201);
         //
     }
 
@@ -45,13 +45,13 @@ class DetalhePedidoController extends Controller
      */
     public function show($id)
     {
-        $detalhe = DetalhePedido::find($id);
+        $detalhePedido = DetalhePedido::find($id);
 
-        if (!$detalhe) {
-            return response()->json(['message' => 'Detalhe Pedido não encontrado'], 404);
+        if (!$detalhePedido) {
+            return response()->json(['message' => 'Detalhe Pedido não encontrado!'], 404);
         }
 
-        return response()->json($detalhe);
+        return response()->json($detalhePedido);
         //
     }
 
@@ -68,37 +68,37 @@ class DetalhePedidoController extends Controller
      */
     public function update(UpdateDetalhePedidoRequest $request, $id)
     {
-        $detalhe = DetalhePedido::find($id);
+        $detalhePedido = DetalhePedido::find($id);
 
-        if (!$detalhe) {
-            return response()->json(['message' => 'Detalhe Pedido não encontrado'], 404);
+        if (!$detalhePedido) {
+            return response()->json(['message' => 'Detalhe Pedido não encontrado!'], 404);
         }
 
         // Faça o update do tipo
-        $detalhe->update($request->all());
+        $detalhePedido->update($request->all());
 
         // Retorne o tipo
-        return response()->json($detalhe);
+        return response()->json($detalhePedido);
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DetalhePedido $id)
+    public function destroy($id)
     {
-        $detalhe = DetalhePedido::find($id);
+        $detalhePedido = DetalhePedido::find($id);
 
-        if (!$detalhe) {
-            return response()->json(['message' => 'Detalhe Pedido não encontrada!'], 404);
+        if (!$detalhePedido) {
+            return response()->json(['message' => 'Detalhe Pedido não encontrado!'], 404);
         }
 
         //Se tiver dependentes deve retornar erro
 
         // Delete the brand
-        $detalhe->delete();
+        $detalhePedido->delete();
 
-        return response()->json(['message' => 'Detalhe Pedido deletada com sucesso!'], 200);
+        return response()->json(['message' => 'Detalhe Pedido deletado com sucesso!'], 200);
         //
     }
 }

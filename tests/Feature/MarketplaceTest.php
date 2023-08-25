@@ -96,7 +96,17 @@ class MarketplaceTest extends TestCase
             ]);
      }
      
-  
+     public function testPesquisaMarketplacesComFalha()
+     {
+         // Fazer pesquisa com um id inexistente
+         $response = $this->getJson('/api/marketplaces/999'); // o 999 nao pode existir
+ 
+         // Veriicar a resposta
+         $response->assertStatus(404)
+             ->assertJson([
+                 'message' => 'Marketpalce não encontrado'
+             ]);
+     }
    
    
     public function testUpdateMarketplaceSucesso()
